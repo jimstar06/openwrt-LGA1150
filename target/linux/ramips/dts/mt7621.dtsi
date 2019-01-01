@@ -252,6 +252,16 @@
 			status = "disabled";
 		};
 
+		crypto: crypto@4000 {
+			status = "okay";
+
+			compatible = "mediatek,mtk-eip93";
+			reg = <0x4000 0x1000>;
+
+			interrupt-parent = <&gic>;
+			interrupts = <GIC_SHARED 19 IRQ_TYPE_LEVEL_HIGH>;
+		};
+
 		hsdma: hsdma@7000 {
 			compatible = "mediatek,mt7621-hsdma";
 			reg = <0x7000 0x1000>;
