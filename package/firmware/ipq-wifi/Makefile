@@ -24,6 +24,7 @@ endef
 #
 
 ALLWIFIBOARDS:= \
+	hiwifi_c526a \
 	linksys_ea8300 \
 	mobipromo_cm520-79f \
 	p2w_r619ac \
@@ -90,6 +91,7 @@ endef
 # Place files in this directory as board-<devicename>.<qca4019|qca9888|qca9984>
 # Add $(eval $(call generate-ipq-wifi-package,<devicename>,<display name>))
 
+$(eval $(call generate-ipq-wifi-package,hiwifi_c526a,HiWiFi C526A))
 $(eval $(call generate-ipq-wifi-package,linksys_ea8300,Linksys EA8300))
 $(eval $(call generate-ipq-wifi-package,mobipromo_cm520-79f,MobiPromo CM520-79F))
 $(eval $(call generate-ipq-wifi-package,p2w_r619ac,P&W R619AC))

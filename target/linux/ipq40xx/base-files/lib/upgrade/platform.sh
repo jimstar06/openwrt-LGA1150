@@ -49,6 +49,7 @@ platform_do_upgrade() {
 	8dev,jalapeno |\
 	avm,fritzbox-7530 |\
 	avm,fritzrepeater-3000 |\
+	hiwifi,c526a |\
 	mobipromo,cm520-79f |\
 	p2w,r619ac |\
 	qxwlan,e2600ac-c2)
