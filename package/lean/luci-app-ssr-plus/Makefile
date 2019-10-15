@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-ssr-plus
 PKG_VERSION:=1
-PKG_RELEASE:=105
+PKG_RELEASE:=112
 
 PKG_CONFIG_DEPENDS:= CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_Shadowsocks \
 	CONFIG_PACKAGE_$(PKG_NAME)_INCLUDE_V2ray \
@@ -54,6 +54,11 @@ endef
 define Build/Compile
 endef
 
+define Package/luci-app-ssr-plus/conffiles
+/etc/ssr_ip
+/etc/dnsmasq.ssr/gfw_list.conf
+endef
+
 define Package/luci-app-ssr-plus/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci
 	cp -pR ./luasrc/* $(1)/usr/lib/lua/luci
@@ -63,16 +68,12 @@ define Package/luci-app-ssr-plus/install
 	po2lmo ./po/zh-cn/ssr-plus.po $(1)/usr/lib/lua/luci/i18n/ssr-plus.zh-cn.lmo
 endef
 
-define Package/luci-app-ssr-plus/conffiles
-/etc/dnsmasq.ssr/ad.conf
-/etc/dnsmasq.ssr/gfw_list.conf
-endef
-
 define Package/luci-app-ssr-plus/postinst
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
 	( . /etc/uci-defaults/luci-ssr-plus ) && rm -f /etc/uci-defaults/luci-ssr-plus
 	rm -f /tmp/luci-indexcache
+	chmod 755 /etc/init.d/shadowsocksr >/dev/null 2>&1
 	/etc/init.d/shadowsocksr enable >/dev/null 2>&1
 fi
 exit 0
